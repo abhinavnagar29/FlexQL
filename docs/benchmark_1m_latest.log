@@ -1,0 +1,43 @@
+Connected to FlexQL
+Running SQL subset checks plus insertion benchmark...
+Target insert rows: 1000000
+
+[PASS] CREATE TABLE BIG_USERS (0 ms)
+
+Starting insertion benchmark for 1000000 rows...
+Progress: 100000/1000000
+Progress: 200000/1000000
+Progress: 300000/1000000
+Progress: 400000/1000000
+Progress: 500000/1000000
+Progress: 600000/1000000
+Progress: 700000/1000000
+Progress: 800000/1000000
+Progress: 900000/1000000
+Progress: 1000000/1000000
+[PASS] INSERT benchmark complete
+Rows inserted: 1000000
+Elapsed: 543 ms
+Throughput: 1841620 rows/sec
+
+
+[[ Running Unit Tests ]]
+
+[PASS] CREATE TABLE TEST_USERS (0 ms)
+[PASS] RESET TEST_USERS (0 ms)
+[PASS] INSERT TEST_USERS (0 ms)
+[PASS] Single-row value validation
+[PASS] Filtered rows validation
+[PASS] ORDER BY descending validation
+[PASS] Empty result-set validation
+[PASS] CREATE TABLE TEST_ORDERS (0 ms)
+[PASS] RESET TEST_ORDERS (0 ms)
+[PASS] INSERT TEST_ORDERS (0 ms)
+[PASS] Join result validation
+[PASS] Single-condition equality WHERE validation
+[PASS] Join with no matches validation
+[PASS] Invalid SQL should fail
+[PASS] Missing table should fail
+
+Unit Test Summary: 22/22 passed, 0 failed.
+

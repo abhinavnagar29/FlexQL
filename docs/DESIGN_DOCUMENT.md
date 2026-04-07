@@ -228,27 +228,12 @@ If `FLEXQL_CHECKPOINT_BYTES` is non-zero, a checkpoint periodically:
 
 ### 7.4 Recovery procedure
 
-On open in in-process mode:
 
 1. Load snapshot if present
 2. Replay WAL records from the start
 
 Server mode persists by default in the server and also appends successful mutating statements.
 
-### 7.5 Persistence diagram (WAL + snapshot)
-
-```mermaid
-flowchart TD
-  SQL[Mutating SQL\nCREATE / INSERT / DELETE] --> APPEND[Append record to WAL\n[u32 len][sql bytes]]
-  APPEND --> FLUSH[Flush policy\n(immediate / buffered)]
-  FLUSH --> WAL[(flexql_<port>.wal)]
-  WAL -->|on open| REPLAY[Replay WAL]
-  SNAP[(flexql_<port>.snap)] -->|on open| LOAD[Load snapshot]
-  LOAD --> REPLAY
-  REPLAY --> READY[DB ready]
-  WAL -->|checkpoint bytes threshold| CHECKPOINT[Write snapshot + truncate WAL]
-  CHECKPOINT --> SNAP
-```
 
 ## 8. Networking protocol
 
@@ -333,32 +318,4 @@ This section exists to make the submission easy to evaluate and defend.
 
 Testing covered SQL correctness, benchmark compatibility, persistence across restart, invalid-query handling, and concurrent multi-client access. Official unit tests were run successfully, and manual persistence checks were also performed.
 
-## 15. Defending correctness (how to answer evaluation questions)
 
-This section is written to help defend the implementation in a viva/demo.
-
-### 15.1 “How do you know your client API matches the assignment?”
-
-- Point to `include/flexql.h` for the exact function signatures.
-- Point to `src/client/flexql.cpp` for the implementations.
-- Point to `docs/TEST_RESULTS.md` and the official unit tests passing.
-
-### 15.2 “How do you ensure schema correctness?”
-
-- Demonstrate `CREATE TABLE` followed by invalid `INSERT` (wrong types/columns) and show the error.
-- Explain schema is stored per-table and enforced on insert.
-
-### 15.3 “Where is indexing and what does it accelerate?”
-
-- Explain primary key index (`PkIndex`) and equality `WHERE` on PK.
-- Demonstrate `SELECT ... WHERE pk = ...` is fast compared to a full scan.
-
-### 15.4 “How is persistence implemented and tested?”
-
-- Explain WAL and snapshot.
-- Demonstrate restart test (Phase E-style): create table + insert, stop server, restart, SELECT shows same rows.
-
-### 15.5 “How do you support multiple clients?”
-
-- Show the server accepts multiple connections and multiplexes them.
-- State that core execution is serialized for correctness and simplicity, which is a documented trade-off.

@@ -2,7 +2,7 @@
 
 **Student:** Abhinav Nagar (**25CS60R71**)
 
-Embedded SQL engine (CREATE / INSERT / SELECT / WHERE / INNER JOIN) with **disk persistence by default** (WAL + optional snapshot checkpoint) and **automatic client–server networking**. The file **`benchmark/benchmark_flexql.cpp` is the official course driver and is kept byte-for-byte aligned with the assignment**; the benchmark automatically connects to a running `flexql-server` — no environment variables needed.
+Embedded SQL engine (CREATE / INSERT / SELECT / WHERE / INNER JOIN) with **disk persistence by default** (WAL + optional snapshot checkpoint) and **automatic client–server networking**.
 
 ## Quick build
 
@@ -13,7 +13,7 @@ cmake --build build -j"$(nproc)"
 
 Optional PGO wrapper (if present): `./compile.sh`
 
-## Run official benchmark (out-of-process, default)
+## Run official benchmark 
 
 ```bash
 # Terminal A — start server
@@ -94,10 +94,7 @@ Use `--inproc` to force in-process mode (no server needed).
   - Default: ON (unset).
   - Disable: `FLEXQL_SERVER_SELECT_CACHE=0`.
 
-BIG_USERS virtual-table mode:
 
-- `VT=1`: enable virtual BIG_USERS optimization.
-- `VT=0`: force materialized BIG_USERS (also the default).
 
 ## Documentation
 

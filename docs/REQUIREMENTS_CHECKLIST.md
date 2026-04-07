@@ -22,11 +22,5 @@ Mapping to this repository (post–Apr 2026 submission pass). Status: **Satisfie
 | Fault tolerance | Buffered WAL; optional `FLEXQL_FSYNC=1`; checkpoint truncates WAL after snapshot | Crash between buffer and disk can lose last buffered writes unless fsync tuned. |
 | Official benchmark source | `benchmark/benchmark_flexql.cpp` | Same interface as course repo. |
 
-## Risk / limitation (honest)
 
-| Item | Class |
-|------|--------|
-| `DECIMAL` stored as IEEE `double` | **Submit** — document; not arbitrary-precision. |
-| Mixed-type join predicates (VARCHAR vs DECIMAL) | **Submit** — `join_cells` rejects; only same-type compares. |
-| WAL/snapshot under multi-writer if you bypass server | **High risk** — use `flexql-server` for concurrency. |
-| `FLEXQL_BENCH_ISOLATE=1` disables persistence for isolated benchmark runs | **Submit** — opt-in only; documented in server startup. |
+

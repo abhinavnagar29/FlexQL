@@ -17,9 +17,9 @@
 | Primary key index | `PkIndex` (flat + optional Swiss table) | |
 | Caching | Client-side SELECT cache defaults ON (unset) and can be disabled via `FLEXQL_QUERY_CACHE=0`; server-side SELECT response cache defaults ON (unset) and can be disabled via `FLEXQL_SERVER_SELECT_CACHE=0` |  disable caches for strict evaluation by setting both env vars to `0`. |
 | Multithreaded / concurrent clients | `flexql-server`: `poll` + per-connection state | The server supports multiple simultaneous clients via multiplexed I/O. The engine executes requests serially for correctness. |
-| Thread-safe client handle (shared `FlexQL*`) | `FlexQL::mu` in `src/client/flexql.cpp` | Concurrent calls on a shared handle are serialized internally. For parallel throughput, use one connection per thread. |
+| Thread-safe client handle (shared `FlexQL*`) | `FlexQL::mu` in `src/client/flexql.cpp` |  |
 | **Persistence (disk)** | WAL append + optional snapshot checkpoint | **Default ON** unless `FLEXQL_PERSIST=0`. Files: `/tmp/flexql_<port>.wal`, `.snap` (override with `FLEXQL_WAL_PATH`, `FLEXQL_SNAPSHOT_PATH`). |
-| Fault tolerance | Buffered WAL; optional `FLEXQL_FSYNC=1`; checkpoint truncates WAL after snapshot | Crash between buffer and disk can lose last buffered writes unless fsync tuned. |
+| Fault tolerance | checkpoint truncates WAL after snapshot | Crash between buffer and disk can lose last buffered writes unless fsync tuned. |
 | Official benchmark source | `benchmark/benchmark_flexql.cpp` | Same interface as course repo. |
 
 

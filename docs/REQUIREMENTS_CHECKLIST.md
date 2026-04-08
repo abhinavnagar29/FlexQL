@@ -2,7 +2,7 @@
 
 **Student:** Abhinav Nagar (**25CS60R71**)
 
-Mapping to this repository (post–Apr 2026 submission pass). Status: **Satisfied** unless noted.
+
 
 | Requirement | Implementation | Notes |
 |-------------|----------------|-------|

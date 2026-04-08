@@ -20,7 +20,7 @@
 | Thread-safe client handle (shared `FlexQL*`) | `FlexQL::mu` in `src/client/flexql.cpp` |  |
 | **Persistence (disk)** | WAL append + optional snapshot checkpoint | **Default ON** unless `FLEXQL_PERSIST=0`. Files: `/tmp/flexql_<port>.wal`, `.snap` (override with `FLEXQL_WAL_PATH`, `FLEXQL_SNAPSHOT_PATH`). |
 | Fault tolerance | checkpoint truncates WAL after snapshot | Crash between buffer and disk can lose last buffered writes unless fsync tuned. |
-| Official benchmark source | `benchmark/benchmark_flexql.cpp` | Same interface as course repo. |
+| Official benchmark source | `benchmark/benchmark_flexql.cpp` |  |
 
 
 

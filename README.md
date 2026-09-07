@@ -1,6 +1,5 @@
-# FlexQL — submission build
+# FlexQL 
 
-**Student:** Abhinav Nagar (**25CS60R71**)
 
 Embedded SQL engine (CREATE / INSERT / SELECT / WHERE / INNER JOIN) with **disk persistence by default** (WAL + optional snapshot checkpoint) and **automatic client–server networking**.
 
